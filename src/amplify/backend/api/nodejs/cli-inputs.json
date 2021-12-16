@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/home": {
+      "name": "/home",
+      "lambdaFunction": "amplifyLambda",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

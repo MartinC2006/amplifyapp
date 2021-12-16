@@ -90,6 +90,9 @@ class App extends Component
 		
 	testPatchResRestrict()
 	{
+		var res = 'PMOINTEGUSER2';
+		var prjCode = 'LNPRJ00005';
+		
 		// creates entity
 		fetch("http://localhost:8000/resource-restrict", 
 		{
@@ -99,8 +102,8 @@ class App extends Component
 			"accept": "application/json"
 		  },
 		  "body": JSON.stringify({
-			resourceID: 'res',
-			ProjectCode: 'prjCode',
+			resourceID: res,
+			ProjectCode: prjCode
 		  })
 		})
 		.then(response => {this.setState({authCode: response.status, authText: response.statusText});}) 
@@ -125,7 +128,7 @@ class App extends Component
 		
 //////////////////////////////////////////////////////
 // override authentication whilst server offline.
-		//this.setState({auth: true,});
+//		this.setState({auth: true,});
 //////////////////////////////////////////////////////
 		
 	}
