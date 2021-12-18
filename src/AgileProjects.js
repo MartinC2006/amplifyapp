@@ -49,17 +49,26 @@ class AgileProjects extends Component
 	constructor(props)
 	{
 		super(props);
-	
+
 		this.state = 
 		{
 			agileProjects: [],
 			projects: [],
 			projectDetails: {},
-			showAgileProjects: false,			
-			showProjects: false,
+			showAgileProjects: this.props.showAgileProjects,			
+			showProjects: this.props.showProjects,
 			filtAgPrj: '',
 			filtPrj: '',
 		};
+
+		
+		console.log("Input props:");
+		console.log(this.props.showAgileProjects);	
+		console.log(this.props.showProjects);
+
+		console.log("Internal State:");
+		console.log(this.showAgileProjects);	
+		console.log(this.showProjects);
 		
 		this.showHideAgileProjects = this.showHideAgileProjects.bind(this);
 		this.showHideProjects = this.showHideProjects.bind(this);
@@ -79,6 +88,7 @@ class AgileProjects extends Component
 	{
 		// get all entities - GET
 		this.getAgileProjects();
+
 	}
 	
 	filterAgileProject(e)
@@ -96,6 +106,9 @@ class AgileProjects extends Component
 		if(this.state.showAgileProjects === false)
 		{ this.setState({showAgileProjects: true})
 		}else {this.setState({showAgileProjects: false})}
+
+		// set Parent State for showHideAgileProjects
+		this.props.setShowAgileProjects(this.state.showAgileProjects);
 	}	
 	
 	showHideProjects()		
@@ -103,6 +116,9 @@ class AgileProjects extends Component
 		if(this.state.showProjects === false)
 		{ this.setState({showProjects: true})
 		}else {this.setState({showProjects: false})}
+
+		// set Parent State for showHideProjects
+		this.props.setShowProjects(this.state.showProjects);
 	}
 	
 
@@ -279,7 +295,8 @@ class AgileProjects extends Component
 	{
 		let agileTable;
 		let projectsTable;
-		
+
+	
 		if(this.state.showAgileProjects === true)
 		{	agileTable = <RenderAgileProjects 	agileProjects={this.state.agileProjects} 
 												removeAgProject={this.removeAgProject} 

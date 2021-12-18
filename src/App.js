@@ -22,6 +22,8 @@ class App extends Component
 			password: '',
 			showDetails: false,
 			projectDet: {},
+			showAgileProjects: false,
+			showProjects: false,
 		};
 		
 		this.testPatchResRestrict = this.testPatchResRestrict.bind(this);
@@ -29,7 +31,9 @@ class App extends Component
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.setProject = this.setProject.bind(this);
 		this.goBack = this.goBack.bind(this);
-		
+		this.setShowAgileProjects = this.setShowAgileProjects.bind(this);
+		this.setShowProjects = this.setShowProjects.bind(this);
+
 	}
 
 	
@@ -43,6 +47,17 @@ class App extends Component
 		this.setState({showDetails: false, projectDet: ''});
 	}
 	
+	setShowAgileProjects(showAgileProjects)
+	{
+		this.setState({showAgileProjects: showAgileProjects});
+	}
+	
+	setShowProjects(showProjects)
+	{
+		this.setState({showProjects: showProjects});
+	}
+	
+
 	handleSubmit(submitObject) 
 	{
 		console.log("App HandleSubmit: "+submitObject.user+" | "+submitObject.password);
@@ -148,7 +163,12 @@ class App extends Component
 			if(this.state.showDetails === true)
 			{		mainBody = 	<ProjectDetails projectDet={this.state.projectDet} goBack={this.goBack} />
 			}else 
-			{		mainBody = 	<AgileProjects setProject={this.setProject} />
+			{		mainBody = 	<AgileProjects setProject={this.setProject} 
+												setShowAgileProjects={this.setShowAgileProjects} 
+												setShowProjects={this.setShowProjects} 
+												showAgileProjects={this.showAgileProjects} 
+												showProjects={this.showProjects}
+												/>
 					
 			}
 			console.log(this.state);
