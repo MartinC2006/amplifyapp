@@ -55,21 +55,10 @@ class AgileProjects extends Component
 			agileProjects: [],
 			projects: [],
 			projectDetails: {},
-			showAgileProjects: this.props.showAgileProjects,			
-			showProjects: this.props.showProjects,
 			filtAgPrj: '',
 			filtPrj: '',
 		};
 
-		
-		console.log("Input props:");
-		console.log(this.props.showAgileProjects);	
-		console.log(this.props.showProjects);
-
-		console.log("Internal State:");
-		console.log(this.showAgileProjects);	
-		console.log(this.showProjects);
-		
 		this.showHideAgileProjects = this.showHideAgileProjects.bind(this);
 		this.showHideProjects = this.showHideProjects.bind(this);
 		this.getAgileProjects = this.getAgileProjects.bind(this);
@@ -103,22 +92,16 @@ class AgileProjects extends Component
 	
 	showHideAgileProjects()		
 	{		
-		if(this.state.showAgileProjects === false)
-		{ this.setState({showAgileProjects: true})
-		}else {this.setState({showAgileProjects: false})}
-
-		// set Parent State for showHideAgileProjects
-		this.props.setShowAgileProjects(this.state.showAgileProjects);
+		if(this.props.showAgileProjects === false)
+		{ 	this.props.setShowAgileProjects(true); 
+		}else {   this.props.setShowAgileProjects(false);}
 	}	
 	
 	showHideProjects()		
 	{
-		if(this.state.showProjects === false)
-		{ this.setState({showProjects: true})
-		}else {this.setState({showProjects: false})}
-
-		// set Parent State for showHideProjects
-		this.props.setShowProjects(this.state.showProjects);
+		if(this.props.showProjects === false)
+		{ 	this.props.setShowProjects(true);
+		}else {this.props.setShowProjects(false);}
 	}
 	
 
@@ -297,7 +280,7 @@ class AgileProjects extends Component
 		let projectsTable;
 
 	
-		if(this.state.showAgileProjects === true)
+		if(this.props.showAgileProjects === true)
 		{	agileTable = <RenderAgileProjects 	agileProjects={this.state.agileProjects} 
 												removeAgProject={this.removeAgProject} 
 												handleEnabled={this.handleEnabled}
@@ -306,7 +289,7 @@ class AgileProjects extends Component
 												filtAgPrj={this.state.filtAgPrj}/>
 		}
 		
-		if(this.state.showProjects === true)
+		if(this.props.showProjects === true)
 		{	projectsTable = <RenderProjects 	projects={this.state.projects} 
 												getProjects={this.getProjects}
 												addAgileProject={this.addAgileProject} 

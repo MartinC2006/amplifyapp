@@ -34,7 +34,7 @@ class App extends Component
 		this.setShowAgileProjects = this.setShowAgileProjects.bind(this);
 		this.setShowProjects = this.setShowProjects.bind(this);
 
-	}
+	} 
 
 	
 	handleChange(changeObject) 
@@ -47,14 +47,14 @@ class App extends Component
 		this.setState({showDetails: false, projectDet: ''});
 	}
 	
-	setShowAgileProjects(showAgileProjects)
+	setShowAgileProjects(shAgileProjects)
 	{
-		this.setState({showAgileProjects: showAgileProjects});
+		this.setState({showAgileProjects: shAgileProjects});
 	}
 	
-	setShowProjects(showProjects)
+	setShowProjects(shProjects)
 	{
-		this.setState({showProjects: showProjects});
+		this.setState({showProjects: shProjects});
 	}
 	
 
@@ -150,6 +150,8 @@ class App extends Component
 	
 	render() 
 	{	
+		const {showAgileProjects, showProjects} = this.state;
+				
 		let mainBody;
 		var errorCode = '';
 		var form = '';		
@@ -166,8 +168,8 @@ class App extends Component
 			{		mainBody = 	<AgileProjects setProject={this.setProject} 
 												setShowAgileProjects={this.setShowAgileProjects} 
 												setShowProjects={this.setShowProjects} 
-												showAgileProjects={this.showAgileProjects} 
-												showProjects={this.showProjects}
+												showAgileProjects={showAgileProjects} 
+												showProjects={showProjects}
 												/>
 					
 			}
