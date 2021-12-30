@@ -40,7 +40,7 @@ const ModalDiag = () =>
 	function handleCloseModal () 
 	{
 		setIsOpen(false);
-	}
+	} 
 
 		   return (
 			  <div>
