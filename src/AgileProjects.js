@@ -26,11 +26,11 @@ const RenderAgileProjects = (props) =>
 
 const RenderProjects = (props) => 
 {	
-	const { projects, getProjects, addAgileProject, projectDetails, filterProject, filtPrj} = props 
+	const { projects, /*getProjects,*/ addAgileProject, projectDetails, filterProject, filtPrj} = props 
 	
 	return (
 				<div className=".app-projects-list">
-					<button onClick={getProjects}>Get Projects</button>
+					{/*!-- <button onClick={getProjects}>Get Projects</button> --*/}
 					<label> Select Agile Team Projects for <u>"Scheduled Bulk Timesheet Uploading"</u>&nbsp;</label>
 					<ProjectsTable 	projects={projects} 
 									addAgileProject={addAgileProject}									
@@ -77,6 +77,7 @@ class AgileProjects extends Component
 	{
 		// get all entities - GET
 		this.getAgileProjects();
+		this.getProjects();
 
 	}
 	
@@ -291,7 +292,7 @@ class AgileProjects extends Component
 		
 		if(this.props.showProjects === true)
 		{	projectsTable = <RenderProjects 	projects={this.state.projects} 
-												getProjects={this.getProjects}
+												//getProjects={this.getProjects}
 												addAgileProject={this.addAgileProject} 
 												projectDetails={this.projectDetails}
 												filterProject={this.filterProject}

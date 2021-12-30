@@ -3,6 +3,73 @@ import AgileProjects from './AgileProjects'
 import ProjectDetails from './ProjectDetails'
 import PageHeader from './PageHeader'
 import Form from './Form'
+import ReactModal from 'react-modal'
+
+const customStyles = {
+	content: {
+	  top: '50%',
+	  left: '50%',
+	  right: 'auto',
+	  bottom: 'auto',
+	  marginRight: '-50%',
+	  transform: 'translate(-50%, -50%)',
+	},
+  };
+
+
+  // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
+ReactModal.setAppElement(document.getElementById('root'));
+
+const ModalDiag = () =>
+{
+	let subtitle;
+
+	const [modalIsOpen, setIsOpen] = React.useState(false);
+
+	function handleOpenModal () 
+	{
+		setIsOpen(true);
+	}
+	  
+	function handleAfterOpenModal ()
+	{
+		subtitle.style.color = '#f00'
+	}
+	
+	
+	function handleCloseModal () 
+	{
+		setIsOpen(false);
+	}
+
+		   return (
+			  <div>
+				<br /><br />
+				<button onClick={handleOpenModal}>Trigger Modal</button>
+
+			    <ReactModal isOpen={modalIsOpen}
+							onAfterOpen={handleAfterOpenModal}
+							onRequestClose={handleCloseModal}
+							style={customStyles}
+							contentLabel="Example Modal"
+							>
+                			<h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
+							<button onClick={handleCloseModal}>Close Modal</button>
+						
+							<div>I am a modal</div>
+							<form>
+								<input />
+								<button>tab navigation</button>
+								<button>stays</button>
+								<button>inside</button>
+								<button>the modal</button>
+							</form>
+        		</ReactModal>
+				<br /><br />
+			  </div>
+		   );
+}
+
 
 
 class App extends Component 
@@ -24,6 +91,7 @@ class App extends Component
 			projectDet: {},
 			showAgileProjects: false,
 			showProjects: false,
+			showModal: false,
 		};
 		
 		this.testPatchResRestrict = this.testPatchResRestrict.bind(this);
@@ -33,10 +101,8 @@ class App extends Component
 		this.goBack = this.goBack.bind(this);
 		this.setShowAgileProjects = this.setShowAgileProjects.bind(this);
 		this.setShowProjects = this.setShowProjects.bind(this);
-
 	} 
 
-	
 	handleChange(changeObject) 
 	{
 		//this.setState(changeObject);
@@ -102,6 +168,8 @@ class App extends Component
 		  return false;
 		});
 	}
+
+
 		
 	testPatchResRestrict()
 	{
@@ -194,6 +262,7 @@ class App extends Component
 						{form}
 						{mainBody}						
 					</div>
+					<ModalDiag />
 					<button onClick={this.testPatchResRestrict}>test Patch Res</button>
 				</div>				
 				);
