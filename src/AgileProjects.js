@@ -272,7 +272,8 @@ class AgileProjects extends Component
 		  .catch((err) => {
 			// Do something for an error here
 			console.log(err) 
-		  })		
+		  })	
+		  
 	}
 	
 	render() 

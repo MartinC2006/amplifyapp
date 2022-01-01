@@ -68,7 +68,7 @@ const AgileTable = (props) =>
 								removeAgProject={removeAgProject}
 								handleEnabled={handleEnabled}
 								projectDetails={projectDetails}
-								filtAgPrj={filtAgPrj}	/>							
+								filtAgPrj={filtAgPrj}/>							
 		</table>		
 		)
 }

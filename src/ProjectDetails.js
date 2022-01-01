@@ -27,7 +27,6 @@ class ProjectDetails extends Component
 					<h1>Project Details!</h1><br /><br />
 						<RenderProjectDetails projectDet={this.props.projectDet} />
 						<br></br>
-						&nbsp;&nbsp;<button className=".button" onClick={this.props.goBack}>go back</button>
 				</div>	
 				);
 	}	

@@ -19,9 +19,17 @@ const ProjectDetailsTableHeader = () =>
 
 const ProjectDetailsTableBody = (props) => 
 {
-	var lastedit = JSON.stringify(new Date((props.projectDet.LastEditDate - (25567 + 1))*86400*1000));
-
-	return (
+	console.log("PrjectDetailsTableBody:"); 
+	console.log(props);
+	
+	var lastedit;
+	if(typeof props.projectDet != 'undefined')
+	{ 
+		if(typeof props.projectDet.LastEditDate!= 'undefined')
+		{ lastedit = JSON.stringify(new Date((props.projectDet.LastEditDate - (25567 + 1))*86400*1000));
+		}else{ lastedit = "No LastEditDate";}
+		
+		return (
 			<tbody>
 				<tr key={0}>
 					<td>{props.projectDet.ProjectCode}</td>
@@ -34,7 +42,15 @@ const ProjectDetailsTableBody = (props) =>
 				</tr>
 			</tbody>
 			);
-	
+	}else
+	{	return (
+			<tbody>
+				<tr key={0}>
+					<td>No Project Details Data Found</td>
+				</tr>
+			</tbody>
+		);
+	}	
 }
 
 const ProjectDetailsTable = (props) =>

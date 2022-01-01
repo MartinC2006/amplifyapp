@@ -13,6 +13,7 @@ const customStyles = {
 	  bottom: 'auto',
 	  marginRight: '-50%',
 	  transform: 'translate(-50%, -50%)',
+	  borderRadius: 8,
 	},
   };
 
@@ -20,57 +21,53 @@ const customStyles = {
   // Make sure to bind modal to your appElement (https://reactcommunity.org/react-modal/accessibility/)
 ReactModal.setAppElement(document.getElementById('root'));
 
-const ModalDiag = () =>
+const ModalDiag = (props) =>
 {
 	let subtitle;
+	const {projectDet, goBack} = props
 
-	const [modalIsOpen, setIsOpen] = React.useState(false);
+	const [modalIsOpen, setIsOpen] = React.useState(true);
 
+	console.log("ProjectDetails inside ModalDiag:");
+	console.log(props.ProjectDetails);
+	
 	function handleOpenModal () 
 	{
+		console.log("handleOpenModal called:");
 		setIsOpen(true);
 	}
 	  
 	function handleAfterOpenModal ()
 	{
-		subtitle.style.color = '#f00'
+		console.log("handleAfterOpenModal called:");
+		//subtitle.style.color = '#f00'
 	}
 	
 	
 	function handleCloseModal () 
 	{
+		console.log("handleCloseModal called:");
+		props.goBack();
 		setIsOpen(false);
+		
 	} 
 
-		   return (
-			  <div>
-				<br /><br />
-				<button onClick={handleOpenModal}>Trigger Modal</button>
-
-			    <ReactModal isOpen={modalIsOpen}
-							onAfterOpen={handleAfterOpenModal}
-							onRequestClose={handleCloseModal}
-							style={customStyles}
-							contentLabel="Example Modal"
-							>
-                			<h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
-							<button onClick={handleCloseModal}>Close Modal</button>
-						
-							<div>I am a modal</div>
-							<form>
-								<input />
-								<button>tab navigation</button>
-								<button>stays</button>
-								<button>inside</button>
-								<button>the modal</button>
-							</form>
-        		</ReactModal>
-				<br /><br />
-			  </div>
-		   );
+	return (
+		<div>		
+		<ReactModal isOpen={modalIsOpen}
+					onAfterOpen={handleAfterOpenModal}
+					onRequestClose={handleCloseModal}
+					style={customStyles}
+					contentLabel="Project Details Modal"
+					>
+									
+					<ProjectDetails projectDet={props.ProjectDetails}/> 
+					<p style={{display: 'flex', justifyContent: 'right'}}><button onClick={handleCloseModal}>Close Modal</button>
+					</p>
+		</ReactModal>	
+		</div>
+	);
 }
-
-
 
 class App extends Component 
 {	
@@ -221,6 +218,7 @@ class App extends Component
 		const {showAgileProjects, showProjects} = this.state;
 				
 		let mainBody;
+		let prjDetails;
 		var errorCode = '';
 		var form = '';		
 		var pTitle = "Authenticate!";
@@ -230,17 +228,17 @@ class App extends Component
 			form = "";
 			errorCode = "";
 			pTitle = '';
-			if(this.state.showDetails === true)
-			{		mainBody = 	<ProjectDetails projectDet={this.state.projectDet} goBack={this.goBack} />
-			}else 
-			{		mainBody = 	<AgileProjects setProject={this.setProject} 
-												setShowAgileProjects={this.setShowAgileProjects} 
-												setShowProjects={this.setShowProjects} 
-												showAgileProjects={showAgileProjects} 
-												showProjects={showProjects}
-												/>
-					
-			}
+			mainBody = 	<AgileProjects setProject={this.setProject} 
+										setShowAgileProjects={this.setShowAgileProjects} 
+										setShowProjects={this.setShowProjects} 
+										showAgileProjects={showAgileProjects} 
+										showProjects={showProjects} />
+			
+			if(this.state.showDetails===true)
+			{	
+				prjDetails = <ModalDiag ProjectDetails={this.state.projectDet} goBack={this.goBack}/>
+			}		
+			
 			console.log(this.state);
 		}else 
 		{	
@@ -260,9 +258,9 @@ class App extends Component
 						<h1>{pTitle}</h1><br />
 						{errorCode}
 						{form}
-						{mainBody}						
+						{mainBody}	
+						{prjDetails}					
 					</div>
-					<ModalDiag />
 					<button onClick={this.testPatchResRestrict}>test Patch Res</button>
 				</div>				
 				);
